@@ -1,9 +1,11 @@
 
 function save_options() {
-  var Class1 = document.getElementById('first').value;
-  var Class2 = document.getElementById('second').value;
-  var Class3 = document.getElementById('third').value;
-  var Class4 = document.getElementById('fourth').value;
+  var Class1 = document.getElementById('first').checked;
+  var Class2 = document.getElementById('second').checked;
+  var Class3 = document.getElementById('third').checked;
+  var Class4 = document.getElementById('fourth').checked;
+  var minutes = document.getElementById('number').value;
+
   //var likesColor = document.getElementById('like').checked;
 
   chrome.storage.sync.set({
@@ -18,7 +20,7 @@ function save_options() {
     status.textContent = 'Options saved.';
     setTimeout(function() {
       status.textContent = '';
-    }, 750); awdaw
+    }, 750);
   });
 }
 

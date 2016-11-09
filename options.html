@@ -2,14 +2,18 @@
 <html>
 <head><title>My Test Extension Options Page</title></head>
 <body>
-  <form action="demo_form.asp">
-  First class: <input id='first' type="text" name="FirstClass" ><br>
-  Second class: <input id='second' type="text" name="SecondClass" ><br>
-  Third class: <input id='third' type="text" name="ThirdClass" ><br>
-  Fourth class: <input id='fourth' type="text" name="FourthClass"><br>
+<h2> Do you have a class ...</h2>
+<form action="demo_form.asp">
+  <input id="first" type="checkbox" name="vehicle" value="A Block"> A Block <br>
+  <input id="second" type="checkbox" name="vehicle" value="B Block"> B Block<br>
+  <input id="third" type="checkbox" name="vehicle" value="C Block"> C Block<br>
+  <input id="fourth" type="checkbox" name="vehicle" value="D Block"> D Block<br>
+
+<h3> How many minutes between notifications?</h3>
+  <input id="number" type="number" name="quantity" min="1" max="5">
   </form>
-  <h2> Enter in what you have first, second, third, and fourth on Monday.</h2>
-  <h3> Make sure to hit save when you are done.</h1>
+<h3> Make sure to hit save when you are done.</h3>
+
 <div id="status"></div>
 <button id="save">Save</button>
 <script src="options.js"></script>
