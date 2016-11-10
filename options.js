@@ -4,7 +4,7 @@ function save_options() {
   var Class2 = document.getElementById('second').checked;
   var Class3 = document.getElementById('third').checked;
   var Class4 = document.getElementById('fourth').checked;
-  var minutes = document.getElementById('number').value;
+  var minute = document.getElementById('number').value;
 
   //var likesColor = document.getElementById('like').checked;
 
@@ -12,7 +12,8 @@ function save_options() {
     'firstClass': Class1,
     'secondClass': Class2,
     'thirdClass': Class3,
-    'fourthClass': Class4
+    'fourthClass': Class4,
+    'minutes': minute
     //likesColor: likesColor
   }, function() {
     // Update status to let user know options were saved.
@@ -30,15 +31,18 @@ function save_options() {
 function restore_options() {
   // Use default value color = 'red' and likesColor = true.
   chrome.storage.sync.get({
-    'firstClass': 'Block A',
-    'secondClass': 'Block B',
-    'thirdClass': 'Block C',
-    'fourthClass': 'Block D'
+    'firstClass': true,
+    'secondClass': true,
+    'thirdClass': true,
+    'fourthClass': true,
+    'minutes': 5
   }, function(items) {
-    document.getElementById('first').value = items.firstClass;
-    document.getElementById('second').value = items.secondClass;
-    document.getElementById('third').value = items.thirdClass;
-    document.getElementById('fourth').value = items.fourthClass;
+    document.getElementById('first').checked = items.firstClass;
+    document.getElementById('second').checked = items.secondClass;
+    document.getElementById('third').checked = items.thirdClass;
+    document.getElementById('fourth').checked = items.fourthClass;
+    document.getElementById('number').value = items.minutes;
+
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
