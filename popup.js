@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 //'url': "chrome-extension://lfjpjanpjmhlihhlamhhhpipeljjhfia/options.html"
         });
     });
-    
+
     pres.addEventListener('click', function() {
         chrome.tabs.create({
             'url': "https://docs.google.com/presentation/create"
@@ -27,18 +27,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     //Stuff with the Date and Time
-    weekday[0] = "Sunday";
-    weekday[1] = "Monday";
-    weekday[2] = "Tuesday";
-    weekday[3] = "Wednesday";
-    weekday[4] = "Thursday";
-    weekday[5] = "Friday";
-    weekday[6] = "Saturday";
+    // weekday[0] = "Sunday";
+    // weekday[1] = "Monday";
+    // weekday[2] = "Tuesday";
+    // weekday[3] = "Wednesday";
+    // weekday[4] = "Thursday";
+    // weekday[5] = "Friday";
+    // weekday[6] = "Saturday";
   //  document.getElementById('weekDays').innerHTML = weekday[days.getDay()];
     //document.getElementById('hourThing').innerHTML = hourDays;
     //document.getElementById('minuteThing').innerHTML = minuteDays;
 
-    displayNextClass();
+  //  displayNextClass();
     //hi z
     //closing things for everything. EVERYTHING
 });
@@ -49,7 +49,41 @@ chrome.alarms.create("Alarmssssss", {
 });
 
 // on alarm fire calls the function time thing
-chrome.alarms.onAlarm.addListener("Alarmssssss", timeThing);
+//chrome.alarms.onAlarm.addListener("Alarmssssss", timeThing);
+
+function attendanceAlarms(){
+  chrome.storage.sync.get({
+    'firstClass': true,
+    'secondClass': true,
+    'thirdClass': true,
+    'fourthClass': true,
+    'minutes': 5
+  }, function(items) {
+      var classA = items.firstClass;
+      var classB = items.secondClass;
+      var classC = items.thirdClass;
+      var classD = items.fourthClass;
+      var minutes = items.minutes;
+      console.log("alarm");
+      var days = new Date();
+      var wDay = days.getDay();
+      var hourDays = days.getHours();
+      var minuteDays = days.getMinutes();
+      console.log(wDay);
+
+
+
+
+
+
+
+
+
+
+
+//closing over everything
+    });
+}
 
 
 
@@ -317,10 +351,6 @@ function timeThing() {
         //  }); //closing for the load document
     }); //Closing for the get storage sync
 } //Close for the function timeThing
-
-
-
-
 
 
 function displayNextClass() {
