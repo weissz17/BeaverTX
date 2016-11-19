@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-
     //Stuff with the Date and Time
     // weekday[0] = "Sunday";
     // weekday[1] = "Monday";
@@ -57,13 +56,51 @@ document.addEventListener('DOMContentLoaded', function() {
     //closing things for everything. EVERYTHING
 });
 //Creates an alarm that goes off every .75 minutes or 45 seconds.
-chrome.alarms.create("Alarmssssss", {
-    delayInMinutes: 0.25,
-    periodInMinutes: 0.5
+
+chrome.storage.sync.get({
+  'firstClass': true,
+  'secondClass': true,
+  'thirdClass': true,
+  'fourthClass': true,
+  'fourthClass': false,
+  'minutes': 5
+}, function(items) {
+    var classA = items.firstClass;
+    var classB = items.secondClass;
+    var classC = items.thirdClass;
+    var classD = items.fourthClass;
+    var classG = items.fifthClass;
+    var minutes = items.minutes;
+
+    var a = parseInt(minutes)
+
+
+    chrome.alarms.create("Alarmssssss", {
+    delayInMinutes: .5,
+    periodInMinutes: a
+  });
 });
 
+
 // on alarm fire calls the function time thing
-chrome.alarms.onAlarm.addListener("Alarmssssss", attendanceAlarms);
+chrome.alarms.onAlarm.addListener(attendanceAlarms);
+
+
+function attend(x){
+  if (x){
+  if (Notification.permission === "granted") {
+                  var notification = new Notification('Attendance', {
+                      icon: "icon128tr.png",
+                      body: "Click on me to take attendance",
+                  });
+                  notification.onclick = function() {
+                      window.open("https://powerschool.bcdschool.org/public/home.html");
+                      setTimeout(notification.close.bind(notification), 200);
+                  };
+              }
+          }
+}
+
 
 function attendanceAlarms(){
   chrome.storage.sync.get({
@@ -71,36 +108,144 @@ function attendanceAlarms(){
     'secondClass': true,
     'thirdClass': true,
     'fourthClass': true,
+    'fourthClass': false,
     'minutes': 5
   }, function(items) {
       var classA = items.firstClass;
       var classB = items.secondClass;
       var classC = items.thirdClass;
       var classD = items.fourthClass;
+      var classG = items.fifthClass;
       var minutes = items.minutes;
       console.log("alarm");
+      console.log(minutes);
       var days = new Date();
       var wDay = days.getDay();
       var hourDays = days.getHours();
       var minuteDays = days.getMinutes();
-      console.log(wDay);
 if (wDay === 1) {
+//9:05
+//10:45
+//12:10
+//1:15
 
-}
+          if ((hourDays >= 9) && (minuteDays >= 5) && (hourDays <= 10 && minuteDays <=5)) {
+            attend(classA);
+            }
+
+          if ((hourDays >= 10) && (minuteDays >= 45) && (hourDays <= 11 && minuteDays <=45)) {
+            attend(classB);
+
+            }
+
+            //next block 3 update -C
+            if ((hourDays >= 12) && (minuteDays >= 10) && (hourDays <= 13 && minuteDays <=15)) {
+              attend(classG);
+
+                          }
+
+            //next block 4 update -D
+            if ((hourDays <= 17) &&(hourDays >= 14)) {
+              attend(classC);
+            }
+        }
 
 if (wDay === 2) {
+//8:00
+//10:45
+//11:50
+//1:15
 
+
+          if ((hourDays >= 8) && (minuteDays >= 5) && (hourDays <= 10 && minuteDays <=5)) {
+            attend(classC);
+
+            }
+
+          if ((hourDays >= 10) && (minuteDays >= 45) && (hourDays <= 11 && minuteDays <=45)) {
+            attend(classD);
+            }
+
+            //next block 3 update -C
+            if ((hourDays >= 12) && (minuteDays >= 10) && (hourDays <= 13 && minuteDays <=15)) {
+              attend(classG);
+            }
+
+            //next block 4 update -D
+            if ((hourDays <= 17)&&(hourDays >= 14)) {
+              attend(classA);
+            }
 }
 
 if (wDay === 3) {
+  //8:00
+  //10:45
+  //11:50
+  //1:15
+  if ((hourDays >= 8) && (minuteDays >= 5) && (hourDays <= 10 && minuteDays <=5)) {
+    attend(classB);
 
+    }
+
+  if ((hourDays >= 10) && (minuteDays >= 45) && (hourDays <= 11 && minuteDays <=45)) {
+    attend(classD);
+    }
+
+    //next block 3 update -C
+    if ((hourDays >= 12) && (minuteDays >= 10) && (hourDays <= 13 && minuteDays <=15)) {
+      attend(classG);
+    }
+
+    //next block 4 update -D
+    if ((hourDays <= 17)&&(hourDays >= 14)) {
+      attend(classA);
+    }
 }
 
 if (wDay === 4) {
+  //8:00
+  //10:45
+  //11:50
+  //1:15
+  if ((hourDays >= 8) && (minuteDays >= 5) && (hourDays <= 10 && minuteDays <=5)) {
+    attend(classD);
 
+    }
+
+  if ((hourDays >= 10) && (minuteDays >= 45) && (hourDays <= 11 && minuteDays <=45)) {
+    attend(classC);
+    }
+
+    //next block 3 update -C
+    if ((hourDays >= 12) && (minuteDays >= 10) && (hourDays <= 13 && minuteDays <=15)) {
+      attend(classG);
+    }
+
+    //next block 4 update -D
+    if ((hourDays <= 17)&&(hourDays >= 14)) {
+      attend(classB);
+    }
 }
 
 if (wDay === 5) {
+  //8:00
+  //10:45
+  //11:50
+  //1:15
+  if ((hourDays >= 8) && (minuteDays >= 5) && (hourDays <= 10 && minuteDays <=5)) {
+    attend(classA);
+
+    }
+
+  if ((hourDays >= 10) && (minuteDays >= 45) && (hourDays <= 11 && minuteDays <=45)) {
+    attend(classC);
+    }
+
+    //next block 3 update -C
+    if ((hourDays >= 13) && (minuteDays >=15) && (hourDays <= 14 && minuteDays <=25)) {
+      attend(classB);
+    }
+
 
 }
 

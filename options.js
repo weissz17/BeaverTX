@@ -4,6 +4,7 @@ function save_options() {
   var Class2 = document.getElementById('second').checked;
   var Class3 = document.getElementById('third').checked;
   var Class4 = document.getElementById('fourth').checked;
+  var Class5 = document.getElementById('fifth').checked;
   var minute = document.getElementById('number').value;
 
   //var likesColor = document.getElementById('like').checked;
@@ -13,6 +14,7 @@ function save_options() {
     'secondClass': Class2,
     'thirdClass': Class3,
     'fourthClass': Class4,
+    'fifthClass': Class5,
     'minutes': minute
     //likesColor: likesColor
   }, function() {
@@ -35,12 +37,14 @@ function restore_options() {
     'secondClass': true,
     'thirdClass': true,
     'fourthClass': true,
-    'minutes': 5
+    'fifthClass': false,
+    'minutes': 15
   }, function(items) {
     document.getElementById('first').checked = items.firstClass;
     document.getElementById('second').checked = items.secondClass;
     document.getElementById('third').checked = items.thirdClass;
     document.getElementById('fourth').checked = items.fourthClass;
+    document.getElementById('fifth').checked = items.fifthClass;
     document.getElementById('number').value = items.minutes;
 
   });
