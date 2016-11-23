@@ -20,6 +20,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    yesIDone.addEventListener('click', function() {
+      localStorage.hi = false;
+    });
+
     docs.addEventListener('click', function() {
         chrome.tabs.create({
             'url': "https://docs.google.com/document/create"
@@ -57,6 +61,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 //Creates an alarm that goes off every .75 minutes or 45 seconds.
 
+
+
+
+
+
 chrome.storage.sync.get({
   'firstClass': true,
   'secondClass': true,
@@ -71,23 +80,37 @@ chrome.storage.sync.get({
     var classD = items.fourthClass;
     var classG = items.fifthClass;
     var minutes = items.minutes;
-
     var a = parseInt(minutes)
-
-
     chrome.alarms.create("Alarmssssss", {
     delayInMinutes: .5,
     periodInMinutes: a
   });
 });
 
+chrome.alarms.create("checkCheck", {
+delayInMinutes: .5,
+periodInMinutes: .25
 
+var done = localStorage.hi;
+if (!done){
+    localStorage.hi = true;
+}
 // on alarm fire calls the function time thing
-chrome.alarms.onAlarm.addListener(attendanceAlarms);
+chrome.alarms.onAlarm.addListener(function(alarm)){
+  if(alarm.name === "Alarmssssss"){
+        attendanceAlarms();
+    }
+
+  else if(alarm.name === "checkCheck"){
+      resetCheck()
+    }
+}
 
 
 function attend(x){
+var done = localStorage.hi;
   if (x){
+    if(done){
   if (Notification.permission === "granted") {
                   var notification = new Notification('Attendance', {
                       icon: "icon128tr.png",
@@ -96,11 +119,129 @@ function attend(x){
                   notification.onclick = function() {
                       window.open("https://powerschool.bcdschool.org/public/home.html");
                       setTimeout(notification.close.bind(notification), 200);
+                      localStorage.hi = false;
                   };
               }
           }
+        }
 }
 
+function resetCheck(){
+  var days = new Date();
+  var wDay = days.getDay();
+  var hourDays = days.getHours();
+  var minuteDays = days.getMinutes();
+
+  if (wDay === 1) {
+    if ((hourDays >= 10) && (minuteDays >= 5) && (hourDays <= 10 && minuteDays <=7)) {
+      localStorage.hi = true;
+
+      }
+
+    if ((hourDays >= 11) && (minuteDays >= 45) && (hourDays <= 11 && minuteDays <=47)) {
+      localStorage.hi = true;
+      }
+
+      //next block 3 update -C
+      if ((hourDays >= 13) && (minuteDays >= 15) && (hourDays <= 13 && minuteDays <=17)) {
+        localStorage.hi = true;
+      }
+
+      //next block 4 update -D
+      if ((hourDays <= 17)&&(hourDays >= 14)) {
+        localStorage.hi = true;
+      }
+    }
+  if (wDay === 2) {
+    if ((hourDays >= 10) && (minuteDays >= 5) && (hourDays <= 10 && minuteDays <=7)) {
+      localStorage.hi = true;
+
+      }
+
+    if ((hourDays >= 11) && (minuteDays >= 45) && (hourDays <= 11 && minuteDays <=47)) {
+      localStorage.hi = true;
+      }
+
+      //next block 3 update -C
+      if ((hourDays >= 13) && (minuteDays >= 15) && (hourDays <= 13 && minuteDays <=17)) {
+        localStorage.hi = true;
+      }
+
+      //next block 4 update -D
+      if ((hourDays <= 17)&&(hourDays >= 14)) {
+        localStorage.hi = true;
+      }
+  }
+
+  if (wDay === 3) {
+    if ((hourDays >= 10) && (minuteDays >= 5) && (hourDays <= 10 && minuteDays <=7)) {
+      localStorage.hi = true;
+
+      }
+
+    if ((hourDays >= 11) && (minuteDays >= 45) && (hourDays <= 11 && minuteDays <=47)) {
+      localStorage.hi = true;
+      }
+
+      //next block 3 update -C
+      if ((hourDays >= 13) && (minuteDays >= 15) && (hourDays <= 13 && minuteDays <=17)) {
+        localStorage.hi = true;
+      }
+
+      //next block 4 update -D
+      if ((hourDays <= 17)&&(hourDays >= 14)) {
+        localStorage.hi = true;
+      }
+  }
+
+  if (wDay === 4) {
+    if ((hourDays >= 10) && (minuteDays >= 5) && (hourDays <= 10 && minuteDays <=7)) {
+      localStorage.hi = true;
+
+      }
+
+    if ((hourDays >= 11) && (minuteDays >= 45) && (hourDays <= 11 && minuteDays <=47)) {
+      localStorage.hi = true;
+      }
+
+      //next block 3 update -C
+      if ((hourDays >= 13) && (minuteDays >= 15) && (hourDays <= 13 && minuteDays <=17)) {
+        localStorage.hi = true;
+      }
+
+      //next block 4 update -D
+      if ((hourDays <= 17)&&(hourDays >= 14)) {
+        localStorage.hi = true;
+      }
+  }
+
+  if (wDay === 5) {
+    if ((hourDays >= 10) && (minuteDays >= 5) && (hourDays <= 10 && minuteDays <=7)) {
+      localStorage.hi = true;
+
+      }
+
+    if ((hourDays >= 11) && (minuteDays >= 45) && (hourDays <= 11 && minuteDays <=47)) {
+      localStorage.hi = true;
+      }
+
+      //next block 3 update -C
+      if ((hourDays >= 13) && (minuteDays >= 15) && (hourDays <= 13 && minuteDays <=17)) {
+        localStorage.hi = true;
+      }
+
+      //next block 4 update -D
+      if ((hourDays <= 17)&&(hourDays >= 14)) {
+        localStorage.hi = true;
+      }
+  }
+
+
+
+
+}
+// localStorage.hi=a;
+//a = localStorage.hi;
 
 function attendanceAlarms(){
   chrome.storage.sync.get({
@@ -133,9 +274,10 @@ if (wDay === 1) {
             attend(classA);
             }
 
+
+
           if ((hourDays >= 10) && (minuteDays >= 45) && (hourDays <= 11 && minuteDays <=45)) {
             attend(classB);
-
             }
 
             //next block 3 update -C
