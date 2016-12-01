@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     take.addEventListener('click', function() {
         chrome.tabs.create({
-            'url': "https://powerschool.bcdschool.org/public/"
+            'url': "https://powerschool.bcdschool.org/teacher/"
                 //'url': "chrome-extension://lfjpjanpjmhlihhlamhhhpipeljjhfia/options.html"
         });
     });
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     Options.addEventListener('click', function() {
         chrome.tabs.create({
-          'url': "chrome-extension://lfjpjanpjmhlihhlamhhhpipeljjhfia/options.html"
+          'url': "chrome-extension://gpinmoflmkbkpchmjgnoadkjhaoakejg/options.html"
         });
     });
 
@@ -90,21 +90,23 @@ chrome.storage.sync.get({
 chrome.alarms.create("checkCheck", {
 delayInMinutes: .5,
 periodInMinutes: .25
+});
 
 var done = localStorage.hi;
 if (!done){
     localStorage.hi = true;
 }
 // on alarm fire calls the function time thing
-chrome.alarms.onAlarm.addListener(function(alarm)){
+chrome.alarms.onAlarm.addListener(function(alarm){
   if(alarm.name === "Alarmssssss"){
         attendanceAlarms();
     }
 
-  else if(alarm.name === "checkCheck"){
-      resetCheck()
+   if(alarm.name === "checkCheck"){
+      resetCheck();
+      console.log("hi");
     }
-}
+});
 
 
 function attend(x){
@@ -117,7 +119,7 @@ var done = localStorage.hi;
                       body: "Click on me to take attendance",
                   });
                   notification.onclick = function() {
-                      window.open("https://powerschool.bcdschool.org/public/home.html");
+                      window.open("https://powerschool.bcdschool.org/teacher/");
                       setTimeout(notification.close.bind(notification), 200);
                       localStorage.hi = false;
                   };
